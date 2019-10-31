@@ -1,0 +1,16 @@
+Dados necessários para importar connepi:
+	-- Título
+	-- Autor (separado por vírgula)
+	-- Ano (2016)
+	-- Instituição (instituicao_id)
+	-- Área (area_id)
+
+Query:
+
+select paper_settings.setting_value, author.first_name, author.last_name, author.email, author.affiliation, track.setting_value
+from published_papers
+    inner join papers ON published_papers.paper_id = papers.paper_id
+    inner join paper_authors as author ON author.paper_id = papers.paper_id
+    inner join paper_settings ON paper_settings.paper_id = papers.paper_id
+    inner join track_settings as track ON track.track_id = papers.track_id
+where paper_settings.setting_name = 'title' AND track.setting_name = 'abbrev';
